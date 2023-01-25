@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18.x'
+  DENO_VERSION: '1.x'
+  DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
+
+jobs:
+  deploy:
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: https://leagueloader.app
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - uses: denoland/setup-deno@v1
+      with:
+        deno-version: ${{ env.DENO_VERSION }}
+
+    - name: Build with Yarn
+      run: |
+        npm install -g yarn
+        yarn install
+        yarn build --deno
+    - name: Deploy to Deno Deploy
+      run: |
+        deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+        cd dist
+        deployctl deploy --prod --project=leagueloader ./server.js
