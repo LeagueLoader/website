@@ -31,6 +31,8 @@ jobs:
         deno-version: ${{ env.DENO_VERSION }}
         
     - uses: pnpm/action-setup@v2
+      with:
+        version: latest
 
     - name: Build project
       run: |
