@@ -27,10 +27,12 @@ function downloadFile(name: string, url: string) {
 }
 
 export async function downloadLatest() {
-  const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`);
-  const release: Release = await res.json();
-  const asset = release.assets.find(x => x.name.endsWith(release.tag_name + '.zip'));
-  if (asset) {
-    window.open(asset.browser_download_url);
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`);
+    const release: Release = await res.json();
+    const asset = release.assets.find(x => x.name.endsWith(release.tag_name + '.zip'));
+    window.open(asset!.browser_download_url);
+  } catch {
+    window.open(`https://github.com/${REPO}/releases/latest`);
   }
 }

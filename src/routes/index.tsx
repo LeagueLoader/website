@@ -1,11 +1,19 @@
 import { Link } from '@solidjs/router';
-import { onMount } from 'solid-js';
+import { createSignal, onMount, Show } from 'solid-js';
 import { downloadLatest } from '~/lib/download';
 
 // @ts-ignore
 import Typewriter from 'typewriter-effect/dist/core';
+import Spinner from '~/components/Spinner';
 
 export default function Home() {
+
+  const [downloading, setDownloading] = createSignal(false);
+
+  const doDownload = () => {
+    setDownloading(true);
+    downloadLatest().then(() => setDownloading(false));
+  }
 
   onMount(() => {
     const typewriter = new Typewriter('#typewriter', {
@@ -57,13 +65,16 @@ export default function Home() {
             </p>
           </div>
           <div class="text-lg text-teal-800 md:flex md:flex-col md:items-center">
-            <button class="heading bg-white rounded-full px-6 py-2 mx-2 md:mb-4" onClick={downloadLatest}>
-              <i class="bi bi-windows mr-3 text-[#00adef]" /> Download now
+            <button class="heading bg-white rounded-full px-6 py-2 mx-2 md:mb-4 disabled:bg-gray-300"
+              onClick={doDownload} disabled={downloading()}>
+              <Show when={!downloading()} fallback={<Spinner />}>
+                <i class="bi bi-windows mr-3 text-[#00adef]" />
+              </Show> Download now
             </button>
-            <a href="https://github.com/nomi-san/league-loader"
-              rel="external noreferrer" target="_blank"
-              class="heading bg-white rounded-full px-6 py-2 mx-2">
-              <i class="bi bi-github mr-3 text-gray-900" /> Source code ↗
+            <a href="https://github.com/nomi-san/league-loader" rel="external noreferrer" target="_blank">
+              <button class="heading bg-white rounded-full px-6 py-2 mx-2">
+                <i class="bi bi-github mr-3 text-gray-900" /> Source code ↗
+              </button>
             </a>
           </div>
         </section>
@@ -75,8 +86,7 @@ export default function Home() {
             <div class="column feature-box">
               <h2 class="text-2xl font-semibold md:text-center">JavaScript plugins</h2>
               <p class="mt-2">
-                Use community plugins or write your own to customize the Client.<br />
-                Access LCU APIs directly, no limitation.
+                Use community plugins or write your own to customize the Client.
               </p>
             </div>
             <div class="text-center md:mb-8 relative">
@@ -98,6 +108,21 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div class="py-10">
+          <div class="flex flex-row items-center place-content-evenly md:flex-col-reverse md:px-2">
+            <div class="column feature-box">
+              <h2 class="text-2xl font-semibold md:text-center">Inside the League</h2>
+              <p class="mt-2">
+                Access LCU APIs and WebSocket easily, no limitation.
+              </p>
+            </div>
+            <div class="text-center md:mb-8 relative">
+              <img class="max-h-72" src="https://technology.riotgames.com/sites/default/files/lcu_architecture_2.png" alt="" />
+            </div>
+          </div>
+        </div>
+
         <div class="py-10">
           <div class="text-center pt-10">
             <h3 class="text-4xl">// todo</h3>
