@@ -1,7 +1,6 @@
 // @refresh reload
 import { Suspense } from 'solid-js';
 import {
-  A,
   Body,
   ErrorBoundary,
   FileRoutes,
@@ -14,6 +13,7 @@ import {
   Link
 } from 'solid-start';
 
+import GoogleAnalytics from '~/components/GoogleAnalytics';
 import Footer from '~/components/Footer';
 
 import './root.css';
@@ -61,6 +61,7 @@ export default function Root() {
           </ErrorBoundary>
         </Suspense>
         <Scripts />
+        <GoogleAnalytics />
       </Body>
     </Html>
   );
