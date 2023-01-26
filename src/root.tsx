@@ -33,7 +33,7 @@ export default function Root() {
         <Meta name="theme-color" content="#0A323C" />
 
         <Title>League Loader</Title>
-        <Link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <Link rel="icon" type="image/png" href="/logo-32.png" />
 
         <Meta name="title" content={title} />
         <Meta name="description" content={desc} />
