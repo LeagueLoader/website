@@ -45,7 +45,7 @@ export default function Home() {
         <div class="container mx-auto px-4">
           <nav class="py-5 flex flex-row items-center place-content-between">
             <Link href="/" class="flex items-center">
-              <img src="/logo-64.png" width="36" height="36" alt="" />
+              <img src="/logo-64.png" width="36" height="36" alt="" loading="lazy" />
               <h3 class="text-xl ml-2">League Loader</h3>
             </Link>
             <div class="heading">
@@ -90,15 +90,15 @@ export default function Home() {
               </p>
             </div>
             <div class="text-center md:mb-8 relative">
-              <img class="image-box border-shadow " src="/img/features/lcu-3d.png" alt="" />
-              <img class="absolute left-[50%] bottom-0 w-24 md:w-14" src="/img/features/js-logo.png" width="96" alt="" />
+              <img class="image-box border-shadow " src="/img/features/lcu-3d.png" alt="" loading="lazy" />
+              <img class="absolute left-[50%] bottom-0 w-24 md:w-14" src="/img/features/js-logo.png" width="96" alt="" loading="lazy" />
             </div>
           </div>
         </div>
         <div class="py-10">
           <div class="flex flex-row items-center place-content-evenly md:flex-col md:px-2">
             <div class="text-center md:mb-8">
-              <img class="image-box border-shadow " src="/img/features/devtools.png" alt="" />
+              <img class="image-box border-shadow " src="/img/features/devtools.png" alt="" loading="lazy" />
             </div>
             <div class="column feature-box">
               <h2 class="text-2xl font-semibold md:text-center">Built-in DevTools</h2>
@@ -118,7 +118,7 @@ export default function Home() {
               </p>
             </div>
             <div class="text-center md:mb-8 relative">
-              <img class="max-h-72" src="https://technology.riotgames.com/sites/default/files/lcu_architecture_2.png" alt="" />
+              <img class="max-h-72" src="https://technology.riotgames.com/sites/default/files/lcu_architecture_2.png" alt="" loading="lazy" />
             </div>
           </div>
         </div>
